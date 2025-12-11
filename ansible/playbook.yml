@@ -1,7 +1,7 @@
 - name: Deploy Orders API
   hosts: api
   become: yes
-  
+
   tasks:
     - name: Actualizar paquetes
       apt:
@@ -19,20 +19,20 @@
       file:
         path: /opt/api
         state: directory
-        mode: '0755'
+        mode: "0755"
         owner: "{{ ansible_user }}"
     - name: Copiar de aplicación
       copy:
         src: ../app/main.py
         dest: /opt/api/main.py
-        mode: '0644'
+        mode: "0644"
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
     - name: Copiar dependencias de aplicación
       copy:
         src: ../requirements.txt
         dest: /opt/api/requirements.txt
-        mode: '0644'
+        mode: "0644"
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
     - name: Crear entorno virtual
@@ -47,20 +47,3 @@
       command: .venv/bin/python3 /opt/api/main.py
       args:
         chdir: /opt/api
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
